@@ -1,0 +1,46 @@
+{
+	"name": "unique-template-name",
+	"dependencies": [
+		"atemplate",
+		"btemplate"
+	],
+	"next": "nexttemplate",
+	"settings": {
+		"connection": {
+			"host": "linux-users.koreacentral.cloudapp.azure.com",
+			"port": 22,
+			"user": "azureuser",
+			"workingdir": "/home/azureuser",
+			"sudo": true,
+			"exec": false,
+			"sshkey_id": 45
+		},
+		"mustache": {
+			"scopes": {
+				"ssl_certificate": "/opt/certs/fullchain.cer",
+				"ssl_certificate_key": "/opt/certs/rabbitmq.key",
+				"sitename": "site.name",
+				"rabbitmqAdminName": "rabbitmqAdminName",
+				"rabbitmqAdminPassword": "rabbitmqAdminPassword"
+			},
+			"templates": [
+				{
+					"template": "rabbitmq-proxy-5671.conf",
+					"scopes": {}
+				},
+				{
+					"template": "rabbitmq-proxy-15672.conf",
+					"scopes": {}
+				},
+				{
+					"template": "setup-nginx.sh",
+					"scopes": {}
+				},
+				{
+					"template": "setup-rabbitmq.sh",
+					"scopes": {}
+				}
+			]
+		}
+	}
+}

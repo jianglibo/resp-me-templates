@@ -36,21 +36,22 @@
 项目的目录结构：
 
 ```bash
-dependencies.txt
-next.txt
-settings.json
+template-import.json # configuration of the template's import
 start.sh # name starts with start will be the entrypoint, write with any language you know it will run successfully on the target machine.
 ...
 # and all flatten files will be part of the template.
 ```
 
-dependencies.txt的内容：
+## 导入插件
+
+Using zip to zip the folder first.
 ```bash
-name-of-the-dependency-template-one
-name-of-the-dependency-template-two
-...
+zip rabbitmq-ssl.zip rabbitma-ssl/*
 ```
-next.txt的内容：
+Then obtains an upload url from website [resp.me](https://resp.me/app/assets/), like this:
+
 ```bash
-the-only-one-next-template
+curl -H "X-TOBE-CLIENT-SECRET: 19e4p796D1C3c20VH3ry97xUOKj4CSJM3MnB3" -F file=@rabbitmq-ssl.zip https://resp.me/upload-with-secret
 ```
+
+Then import the template.
