@@ -46,12 +46,12 @@ start.sh # name starts with start will be the entrypoint, write with any languag
 
 Using zip to zip the folder first.
 ```bash
-zip rabbitmq-ssl.zip rabbitma-ssl/*
+zip rabbitmq-ssl.zip rabbitmq-ssl/*
 ```
-Then obtains an upload url from website [resp.me](https://resp.me/app/assets/), like this:
+Then to obtain an upload url from website [resp.me](https://resp.me/app/assets/), like this:
 
 ```bash
 curl -H "X-TOBE-CLIENT-SECRET: 19e4p796D1C3c20VH3ry97xUOKj4CSJM3MnB3" -F file=@rabbitmq-ssl.zip https://resp.me/upload-with-secret
 ```
 
-Then import the template.
+Then import the template in the template list page.

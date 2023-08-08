@@ -1,17 +1,10 @@
 #!/bin/bash
 
-echo "something changed."
-# Check if unzip is already installed
-if ! command -v unzip &>/dev/null; then
-	# Install unzip
-	sudo apt-get update
-	sudo apt-get install unzip
-	echo "unzip installed successfully."
-else
-	echo "unzip is already installed."
-fi
-
+# you can comment out lines bellow after the initial setup.
 source ./setup-nginx.sh
 source ./setup-rabbitmq.sh
 
+
+
+# tell the system not to delete the folder after execution.
 exit 210
