@@ -1,7 +1,7 @@
 {
 	"name": "rabbitmq-ssl",
 	"dependencies": [
-		"free-ssl"
+		"free-sub-domain"
 	],
 	"next": null,
 	"assets": [
@@ -9,29 +9,26 @@
 	],
 	"settings": {
 		"connection": {
-			"host": "linux-users.koreacentral.cloudapp.azure.com",
+			"host": "change.to.the-created.domain",
 			"port": 22,
-			"user": "azureuser",
-			"workingdir": "/home/azureuser",
+			"user": "user-on-your-server",
+			"workingdir": "/home/user-on-your-server",
 			"sudo": true,
 			"exec": false,
-			"sshkey_id": 45
+			"sshkey_id": 9999
 		},
 		"mustache": {
 			"scopes": {
-				"ssl_certificate": "/opt/certs/fullchain.cer",
-				"ssl_certificate_key": "/opt/certs/rabbitmq.key",
-				"sitename": "site.name",
+				"cert_dependency": {
+					"domain_name": "y1.free-ssl.me",
+					"domain_id": 666
+				},
 				"rabbitmqAdminName": "rabbitmqAdminName",
 				"rabbitmqAdminPassword": "rabbitmqAdminPassword"
 			},
 			"templates": [
 				{
-					"template": "rabbitmq-proxy-5671.conf",
-					"scopes": {}
-				},
-				{
-					"template": "rabbitmq-proxy-15672.conf",
+					"template": "nginx-1.18.0.conf",
 					"scopes": {}
 				},
 				{

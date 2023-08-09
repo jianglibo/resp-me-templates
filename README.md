@@ -55,3 +55,9 @@ curl -H "X-TOBE-CLIENT-SECRET: 19e4p796D1C3c20VH3ry97xUOKj4CSJM3MnB3" -F file=@r
 ```
 
 Then import the template in the template list page.
+
+## 写插件的一些建议
+
+通常一个应用系统的为了配置的可阅读性和人为操作时隔离错误，会将配置文件分散然后用include将它们配置起来。
+
+但插件通常是由程序来操作，单一的配置文件更加便于用脚本来修改，备份和恢复。

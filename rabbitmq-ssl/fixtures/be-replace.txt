@@ -1,0 +1,3 @@
+hello
+<<<fixtures/embbed.txt>>>
+world.
