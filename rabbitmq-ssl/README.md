@@ -60,3 +60,56 @@ the settings of the rabbitmq-ssl:
   }
 }
 ```
+
+## Using java to verify the installation.
+
+```java
+  @Test
+  void tconnection() throws KeyManagementException, NoSuchAlgorithmException, IOException,
+      InterruptedException, TimeoutException {
+    TrustManager[] trustManagers = new TrustManager[] {
+        new X509TrustManager() {
+          public X509Certificate[] getAcceptedIssuers() {
+            return null;
+          }
+
+          public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+
+          public void checkServerTrusted(X509Certificate[] certs, String authType) {
+            // Perform your certificate validation here
+          }
+        }
+    };
+
+    SSLContext sslContext = SSLContext.getInstance("TLS");
+    sslContext.init(null, trustManagers, new java.security.SecureRandom());
+
+    String QUEUE_NAME = "test_queue";;
+    ConnectionFactory factory = new ConnectionFactory();
+    factory.setHost("y2.free-ssl.me"); // Replace with your RabbitMQ server host
+    factory.setPort(5671); // SSL/TLS port
+    factory.setUsername("rabbitmqAdminName"); // Replace with your RabbitMQ username
+    factory.setPassword("rabbitmqAdminPassword"); // Replace with your RabbitMQ password
+    factory.useSslProtocol(sslContext); // Enable SSL/TLS
+
+    try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+      channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+      // Sending a message
+      String message = "Hello, RabbitMQ!";
+      channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN,
+          message.getBytes());
+      System.out.println(" [x] Sent '" + message + "'");
+
+      // Receiving a message
+      channel.basicConsume(QUEUE_NAME, true, (consumerTag, delivery) -> {
+        String receivedMessage = new String(delivery.getBody(), "UTF-8");
+        System.out.println(" [x] Received '" + receivedMessage + "'");
+      }, consumerTag -> {
+      });
+
+      // Wait for a while to allow the messages to be processed
+      Thread.sleep(5000);
+    }
+  }
+```

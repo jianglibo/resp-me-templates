@@ -47,7 +47,12 @@ sudo rabbitmq-plugins enable rabbitmq_management
 
 sudo rabbitmqctl add_user {{rabbitmqAdminName}} {{rabbitmqAdminPassword}}
 
+sudo rabbitmqctl change_password {{rabbitmqAdminName}} {{rabbitmqAdminPassword}}
+
 sudo rabbitmqctl set_user_tags {{rabbitmqAdminName}} administrator
+
+
+sudo rabbitmqctl set_permissions -p / {{rabbitmqAdminName}} ".*" ".*" ".*"
 
 sudo rabbitmqctl delete_user guest
 

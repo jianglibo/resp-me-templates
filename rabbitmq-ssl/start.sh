@@ -10,6 +10,7 @@ source ./setup-nginx.sh
 source ./setup-rabbitmq.sh
 
 to_dir="/etc/nginx/certs"
+mkdir -p "$to_dir"
 backup_dir="$(dirname "$to_dir")/certs_$(date +'%Y%m%d%H%M%S')"
 # Create the backup directory
 mkdir -p "$backup_dir"
