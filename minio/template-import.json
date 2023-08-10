@@ -1,0 +1,43 @@
+{
+	"name": "minio",
+	"dependencies": [
+		"free-sub-domain"
+	],
+	"next": null,
+	"assets": [],
+	"settings": {
+		"connection": {
+			"host": "change.to.the-created.domain",
+			"port": 22,
+			"user": "user-on-your-server",
+			"workingdir": "/home/user-on-your-server",
+			"sudo": true,
+			"exec": false,
+			"sshkey_id": 9999
+		},
+		"mustache": {
+			"scopes": {
+				"cert_dependency": {
+					"domain_name": "y1.free-ssl.me",
+					"domain_id": 666
+				},
+				"MINIO_ROOT_USER": "minioAdminUser",
+				"MINIO_ROOT_PASSWORD": "minioAdminPassword",
+				"MINIO_VOLUMES": "/opt/minio/data",
+				"MINO_SERVER_PORT": 9000,
+				"MINO_CONSOLE_PORT": 9001,
+				"MINIO_OPTS": "--certs-dir /opt/minio/certs"
+			},
+			"templates": [
+				{
+					"template": "minio.env",
+					"scopes": {}
+				},
+				{
+					"template": "start.sh",
+					"scopes": {}
+				}
+			]
+		}
+	}
+}
