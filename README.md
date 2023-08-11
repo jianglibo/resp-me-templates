@@ -54,6 +54,8 @@ Then to obtain an upload url from website [resp.me](https://resp.me/app/assets/)
 curl -H "X-TOBE-CLIENT-SECRET: 19e4p796D1C3c20VH3ry97xUOKj4CSJM3MnB3" -F file=@rabbitmq-ssl.zip https://resp.me/upload-with-secret
 ```
 
+<iframe width="560" height="315" src="https://youtu.be/SHsN37IrIkM" frameborder="0" allowfullscreen></iframe>
+
 Then import the template in the template list page.
 
 ## 写插件的一些建议
