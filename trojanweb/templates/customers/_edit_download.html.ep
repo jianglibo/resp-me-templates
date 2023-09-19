@@ -1,0 +1,35 @@
+% my $display = $h->{display} ? '' : 'style="display:none;"';
+
+%# https://docs.mojolicious.org/Mojolicious/Plugin/TagHelpers#input_tag
+
+%# <span onclick="this.parentElement.style.display = 'none'" style="cursor: pointer;">Close</span>
+% my $hx_post_url = url_for "/customers/downloads";
+<form hx-post="<%= $hx_post_url %>" class="form-table contains-cm" <%== $display %> hx-swap="outerHTML" hx-ext="disable-element">
+% if ($error) {
+  <div class="error-box">
+    <%= $error %>
+  </div>
+% }
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Name' %></label>
+    </div>
+    <div class="input-cell">
+<input type="text" required="true" name="name" value="<%= $model_value-> {name} %>"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'URL' %></label>
+    </div>
+    <div class="input-cell">
+<input type="text" required="true" name="url" value="<%= $model_value-> {url} %>"/>
+	</div>
+  </div>
+  <p style="border: none;"><%= l 'The file will be downloaded from the URL and saved on the server for downloading.'%></p>
+  <button type="submit" class="btn dos-button hide-in-progress"><%= l 'Submit'%></button>
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+</form>
+
+
+%# https://docs.mojolicious.org/Mojo/Template

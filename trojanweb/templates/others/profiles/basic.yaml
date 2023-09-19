@@ -1,0 +1,45 @@
+mixed-port: 7890
+tun:
+  enable: true
+  stack: gvisor
+  dns-hijack:
+    - 198.18.0.2:53
+  auto-route: true
+  auto-detect-interface: true
+bind-address: '*'
+log-level: debug
+mode: "rule"
+proxies:
+  - name: t1
+    type: trojan
+    server: 
+    port: 443
+    password: 
+external-controller: 127.0.0.1:9090
+
+dns:
+  enable: false
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 114.114.114.114
+    - 8.8.8.8
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 114.114.114.114
+    - 8.8.8.8
+    - tls://dns.rubyfish.cn:853
+    - https://1.1.1.1/dns-query
+    - dhcp://en0
+proxy-groups:
+  - name: Trojan
+    type: select
+    proxies:
+      - t1
+rules:
+  - DOMAIN-SUFFIX,azure.com,DIRECT
+  - DOMAIN,resp.me,DIRECT
+  - DOMAIN-SUFFIX,openai.com,Trojan
+  - DOMAIN-SUFFIX,google.com,Trojan
+  - DOMAIN,ipinfo.io,Trojan
+  - GEOIP,CN,DIRECT
+  - MATCH,Trojan

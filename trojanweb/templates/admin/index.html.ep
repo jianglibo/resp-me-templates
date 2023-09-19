@@ -1,0 +1,34 @@
+% layout 'default';
+
+%= include 'layouts/_navigate'
+
+<input style="width: 100%;margin: 0px;" class="form-control" type="search" 
+       name="search" placeholder="<%= l 'Begin Typing To Search Clients...' %>" 
+       hx-get="/admin/clients" 
+       hx-trigger="keyup changed delay:500ms, search" 
+       hx-target="#clients-table" 
+       hx-indicator=".htmx-indicator"/>
+
+  <table id="clients-table-out">
+  <thead>
+  <tr>
+    <th><%= l 'Username' %></th>
+    <th><%= l 'Password' %></th>
+    <th><%= l 'Quota' %></th>
+    <th><%= l 'Download' %></th>
+    <th><%= l 'Upload' %></th>
+    <th><%= l 'Actions' %></th>
+  </tr>
+  </thead>
+  <tbody id="clients-table">
+  
+  % foreach my $row ( @$rows ) {
+    %= include 'client/_table_row', client => $row, h => {}
+  % }
+
+%= include 'client/_load_more_clients', rows => $rows,  h => {}
+</tbody>
+</table>
+
+<h2 _="on click toggle *display of the next <form/>" style="cursor: pointer;"><%= l 'Add A Client' %></h2>
+%= include 'client/_add_form', error => $error, h => {}, client => { quota => 1000 };

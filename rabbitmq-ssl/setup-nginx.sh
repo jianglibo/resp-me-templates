@@ -15,4 +15,5 @@ else
     mkdir -p "${NGINX_BASE}/certs"
 fi
 
+backup_and_copy ./certs /etc/nginx/certs
 

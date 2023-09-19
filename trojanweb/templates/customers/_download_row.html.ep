@@ -1,0 +1,32 @@
+<%
+  my $confirm = encode_json {showCancelButton => Mojo::JSON->true, title => 'Confirm', text => 'Do you want to continue?', icon => 'warning', confirmButtonText => 'Confirm', cancelButtonText => 'Cancel'};
+%>
+ <tr class="dos-row">
+  <td>
+  <span title="<%= $model_value->{url} %>">
+  <%= $model_value->{name} %>
+  </span>
+  </td>
+  <td>
+  %= $model_value->{created_at}
+  </td>
+  <td>
+  %# https://htmx.org/attributes/hx-trigger/
+  <% 
+  my $hx_delete_url = url_for "/customers/downloads/$model_value->{id}";
+  %>
+    <button class="btn dos-button" hx-delete="<%= $hx_delete_url %>"
+       hx-ext="disable-element" 
+       hx-target="closest tr"
+       data-confirm-message="<%= $confirm %>">
+       <%= l 'Delete' %>
+    </button>
+
+    <form style="display: inline;" hx-get="<%= $hx_delete_url %>" class="form-table contains-cm" hx-swap="outerHTML" hx-ext="disable-element">
+    <button class="btn dos-button  hide-in-progress" type="submit">
+      <%= l 'Download' %>
+    </button>
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+    </form>
+  </td>
+</tr>

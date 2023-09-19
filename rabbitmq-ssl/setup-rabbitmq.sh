@@ -51,7 +51,6 @@ sudo rabbitmqctl change_password {{rabbitmqAdminName}} {{rabbitmqAdminPassword}}
 
 sudo rabbitmqctl set_user_tags {{rabbitmqAdminName}} administrator
 
-
 sudo rabbitmqctl set_permissions -p / {{rabbitmqAdminName}} ".*" ".*" ".*"
 
 sudo rabbitmqctl delete_user guest

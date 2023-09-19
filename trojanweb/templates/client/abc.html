@@ -1,0 +1,53 @@
+<tr hx-swap-oob="afterbegin:#clients-table">
+  <td>
+
+    <div title="Double click to edit. 双击编辑" hx-get="/clients/39/edit?fname=username&fvalue=dsds" hx-target="this"
+      hx-swap="outerHTML" hx-trigger="dblclick">
+      dsds
+      <img class="htmx-indicator" src="/assets/svg-loaders/puff.svg" />
+    </div>
+    <form></form>
+
+  </td>
+  <td>
+
+    <div title="Double click to edit. 双击编辑" hx-get="/clients/39/edit?fname=password&fvalue=Change+me" hx-target="this"
+      hx-swap="outerHTML" hx-trigger="dblclick">
+      Change me
+      <img class="htmx-indicator" src="/assets/svg-loaders/puff.svg" />
+    </div>
+
+  </td>
+  <td>
+
+    <div title="Double click to edit. 双击编辑" hx-get="/clients/39/edit?fname=quota&fvalue=12K" hx-target="this"
+      hx-swap="outerHTML" hx-trigger="dblclick">
+      12K
+      <img class="htmx-indicator" src="/assets/svg-loaders/puff.svg" />
+    </div>
+
+  </td>
+  <td>
+    0
+  </td>
+  <td>
+    0
+  </td>
+  <td>
+    <button class="btn dos-button" hx-delete="/clients/39" hx-target="closest tr" _="on htmx:confirm(issueRequest)
+             halt the event
+             call Swal.fire({title: 'Confirm', text:'Do you want to continue?'})
+             if result.isConfirmed issueRequest()">
+      Delete
+    </button>
+  </td>
+</tr>
+
+
+
+<form hx-post="/clients" class="form-table" hx-swap="outerHTML">
+  <input name="password" type="text" required="true">
+  <input name="username" type="text" required="true">
+  <input name="quota" type="text" required="true" /><span>1G,1M etc.</span>
+  <button type="submit" class="btn dos-button">Submit</button>
+</form>

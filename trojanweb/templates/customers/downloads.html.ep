@@ -1,0 +1,28 @@
+%# %= app->home->child('data', 'important.txt');
+
+% layout 'default';
+
+%= include 'layouts/_navigate'
+
+  <table id="downloads-table-out">
+  <thead>
+  <tr>
+    <th><%= l 'Name' %></th>
+%#    <th><%= l 'URL' %></th>
+%#    <th><%= l 'Filename' %></th>
+    <th><%= l 'CreatedAt' %></th>
+    <th><%= l 'Actions' %></th>
+  </tr>
+  </thead>
+  <tbody id="downloads-table">
+  
+  % foreach my $row ( @$rows ) {
+    %= include 'customers/_download_row', model_value => $row, h => {}
+  % }
+
+%= include 'customers/_load_more_downloads', rows => $rows,  h => {}
+</tbody>
+</table>
+
+<h2 onclick="toggleNextElement(this, 'form')" style="cursor: pointer;"><%= l 'Add A Download' %></h2>
+%= include 'customers/_edit_download', error => $error, h => {}, model_value => {};

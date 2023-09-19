@@ -1,0 +1,28 @@
+% if (my $msg = flash 'message') {
+  <b><%= $msg %></b><br>
+% }
+<%= l 'Welcome' %> <%= session('user')->{'user'} %>.
+%= link_to 'logout' => begin
+%= l 'Logout'
+% end
+
+<div style="margin-top: 10px;margin-bottom: 3px;">
+<span style="margin-right: 50px;"></span>
+%= link_to 'playground' => (class => (current_route 'playground') ? 'active' : undef) =>  begin
+%= l 'Playground'
+% end
+
+%= link_to 'customers'=> (class => (current_route 'customers') ? 'active' : undef) => begin
+%= l 'Configuration'
+% end
+
+% if (is_admin) {
+%= link_to 'admin' => (class => (current_route 'admin') ? 'active' : undef) => begin
+%= l 'Admin'
+% end
+%}
+
+%= link_to 'downloads' => {action => 'downloads'} => (class => (current_route 'downloads') ? 'active' : undef) => begin
+%= l 'Downloads'
+% end
+</div>

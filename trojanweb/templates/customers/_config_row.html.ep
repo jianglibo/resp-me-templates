@@ -1,0 +1,38 @@
+
+<%
+  my $confirm = encode_json {showCancelButton => Mojo::JSON->true, title => 'Confirm', text => 'Do you want to continue?', icon => 'warning', confirmButtonText => 'Confirm', cancelButtonText => 'Cancel'};
+  my $toCopyMessage = url_for("retrieve_config")->query(pw => $model_value->{password})->to_abs;
+  my $btitle =  'Copy this URL and paste it into the Clash Client App, That\'s it.';
+  $btitle = $fix_lang ? $btitle : (l $btitle);
+  my $bcontnet =  'Copy URL';
+  $bcontnet = $fix_lang ? $bcontnet : (l $bcontnet);
+  my $deletebtn = 'Delete';
+  $deletebtn = $fix_lang ? $deletebtn : (l $deletebtn);
+%>
+
+ <tr class="dos-row">
+  <td>
+  %= $model_value->{name}
+  </td>
+  <td>
+  %= $model_value->{created_at}
+  </td>
+  <td>
+  %# https://htmx.org/attributes/hx-trigger/
+  % my $hx_delete_url = url_for "/customers/configs/$model_value->{id}";
+    <button class="btn dos-button" hx-delete="<%= $hx_delete_url  %>"
+       hx-target="closest tr"
+       data-confirm-message="<%= $confirm %>">
+       <%= $deletebtn %>
+    </button>
+    <button title="<%= $btitle %>&#x1F604;" class="btn dos-button" onclick="copyToClipboard(this, event);return false;" data-to-copy-message="<%= $toCopyMessage %>">
+      <%= $bcontnet %>
+    </button>
+  </td>
+</tr>
+
+%# https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#include
+%#       _="on htmx:confirm(issueRequest)
+%#             halt the event
+%#             call Swal.fire({title: 'Confirm', text:'Do you want to continue?'})
+%#             if result.isConfirmed issueRequest()">

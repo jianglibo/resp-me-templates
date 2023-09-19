@@ -1,0 +1,332 @@
+/* Apply DOS window-style background to the entire page */
+body {
+	background-color: #000;
+	/* Dark background for the whole page */
+	color: #00ff00;
+	/* Bright green text */
+	font-family: 'Courier New', monospace;
+	/* Use a monospaced font for a terminal-like appearance */
+	margin: 0;
+	/* Remove default margin */
+	padding: 0;
+	/* Remove default padding */
+}
+
+/* Center the container element */
+.centered-container {
+	width: 80%;
+	/* Adjust the width as desired */
+	max-width: 800px;
+	/* Set a maximum width if needed */
+	margin: 0 auto;
+	/* Center horizontally */
+	padding: 20px;
+	/* Add padding if desired */
+	/* Add padding if desired */
+    position: relative; /* Add relative positioning to the container */
+}
+
+/* Remove the underline from all links */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Optionally, you can style links with different colors or other properties */
+a:hover {
+  /* Style for when the mouse hovers over the link */
+  text-decoration: none;
+  color: #FF0000; /* Change the color on hover (optional) */
+}
+
+a.active {
+  /* Style for when the link is active */
+  text-decoration: none;
+  color: #FF0000; /* Change the color on hover (optional) */
+  font-weight: bold; /* Add bold font weight */
+}
+
+
+/* Define a class for removing underlines from links */
+.no-underline {
+  text-decoration: none;
+}
+
+/* Optionally, you can style links with different colors or other properties */
+.no-underline:hover {
+  /* Style for when the mouse hovers over the link */
+  text-decoration: none; 
+  color: #FF0000; /* Change the color on hover (optional) */
+}
+
+
+/* Common styles for all input types, buttons, and paragraphs */
+input,
+button,
+p,
+label {
+	background-color: #000;
+	/* Dark background */
+	color: #00ff00;
+	/* Bright green text */
+	font-family: 'Courier New', monospace;
+	/* Use the same font as the body */
+	border: 1px solid #00ff00;
+	/* Green border */
+	padding: 8px;
+	margin: 5px;
+}
+
+form label {
+	border: none;
+	/* Remove border on labels */
+}
+
+/* Style for a selected (clicked) row */
+.dos-row.selected {
+	background-color: #00cc00;
+	/* Add your selected row background color */
+	color: #fff;
+	/* Text color for selected row */
+	font-weight: bold;
+	/* Font weight for selected row */
+	/* Add any other styles you want for selected rows */
+}
+
+
+.form-table {
+	display: table;
+}
+
+.form-row {
+	display: table-row;
+}
+
+.label-cell,
+.input-cell {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+	/* Add padding as needed */
+}
+
+.label-cell {
+	width: 150px;
+	/* Fixed width for labels */
+}
+
+/* Specific styles for buttons */
+button {
+	cursor: pointer;
+	/* Change cursor on hover */
+}
+
+/* Specific styles for paragraphs */
+p {
+	font-size: 16px;
+	/* Adjust font size as needed */
+	line-height: 1.5;
+	/* Adjust line height as needed */
+}
+
+/* Specific styles for labels */
+label {
+	display: block;
+	/* Labels on new lines */
+	font-weight: bold;
+	/* Bold labels for emphasis */
+}
+
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	background-color: #000;
+	/* Dark background */
+	color: #00ff00;
+	/* Bright green text */
+}
+
+th,
+td {
+	border: 1px solid #00ff00;
+	/* Green border */
+	padding: 8px;
+	text-align: left;
+}
+
+.htmx-indicator {
+	display: none;
+}
+
+.htmx-request .my-indicator {
+	display: inline;
+}
+
+.htmx-request.my-indicator {
+	display: inline;
+}
+
+.htmx-request.hide-in-progress {
+	display: none;
+}
+
+.htmx-request .hide-in-progress {
+	display: none;
+}
+
+.error-box {
+	background-color: #000;
+	color: #ff0000;
+	border: 2px solid #ff0000;
+	padding: 30px 10px 10px;
+	/* Adjust padding */
+	font-family: "Courier New", monospace;
+	font-size: 14px;
+	text-align: center;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	width: 300px;
+	/* Adjust width as needed */
+	margin: 0 auto;
+	/* Center horizontally */
+	position: relative;
+	overflow: hidden;
+}
+
+.error-box:before {
+	content: "ERROR";
+	display: block;
+	background-color: #ff0000;
+	color: #000;
+	font-weight: bold;
+	padding: 5px;
+	font-size: 16px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+	border: 1px solid #000;
+}
+
+.error-message {
+	margin-top: 20px;
+	/* Adjust spacing between the "ERROR" label and the message */
+}
+
+.dos-button {
+	background-color: #000;
+	/* Background color */
+	color: #7FFF00;
+	/* Text color (bright green) */
+	border: 1px solid #7FFF00;
+	/* Border color (bright green) */
+	padding: 5px 10px;
+	/* Padding for the button */
+	font-family: 'Courier New', monospace;
+	/* Font with a monospace feel */
+	cursor: pointer;
+	/* Change cursor to pointer on hover (optional) */
+}
+
+.dos-button:hover {
+	background-color: #7FFF00;
+	/* Change background color on hover */
+	color: #000;
+	/* Change text color on hover */
+}
+
+.dos-button[disabled] {
+	background-color: #444;
+	/* Background color for disabled state (gray) */
+	color: #777;
+	/* Text color for disabled state (light gray) */
+	border: 1px solid #777;
+	/* Border color for disabled state (light gray) */
+	cursor: not-allowed;
+	/* Change cursor to not-allowed for disabled state */
+}
+
+/* Position the dropdown at the top right */
+.dropdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #000;
+}
+
+/* Style the dropdown button */
+#dropdown-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Style the dropdown menu */
+#dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: none;
+}
+
+#dropdown-menu li {
+    background-color: #000;
+}
+
+#dropdown-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+/* Show the dropdown menu on button hover */
+.dropdown:hover #dropdown-menu {
+    display: block;
+}
+
+/* Hide the dropdown menu when not hovered */
+.hidden {
+    display: none;
+}
+
+/* Style the normal dropdown button */
+#normal-dropdown-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Style the normal dropdown menu */
+#normal-dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: none;
+    background-color: #000;
+    top: 35px; /* Adjust the top position to align with the button */
+    left: 0; /* Ensure it aligns with the button */
+}
+
+#normal-dropdown-menu li {
+    background-color: #000;
+}
+
+#normal-dropdown-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+/* Show the normal dropdown menu on button hover */
+#normal-dropdown-button:hover + #normal-dropdown-menu {
+    display: block;
+}

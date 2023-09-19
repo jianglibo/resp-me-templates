@@ -1,0 +1,44 @@
+% my $display = $h->{display} ? '' : 'style="display:none;"';
+
+% 
+
+%# https://docs.mojolicious.org/Mojolicious/Plugin/TagHelpers#input_tag
+
+%# <span onclick="this.parentElement.style.display = 'none'" style="cursor: pointer;">Close</span>
+% my $hx_post_url = url_for "/customers/configs";
+<form hx-post="<%= $hx_post_url %>" 
+ class="form-table contains-cm" <%== $display %>
+ hx-ext="disable-element"
+ hx-swap="outerHTML">
+% if ($error) {
+  <div class="error-box">
+    <%= $error %>
+  </div>
+% }
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Name' %></label>
+    </div>
+    <div class="input-cell">
+%# %= input_tag config_name => $model_value->{name}, required => 'true';
+<input type="text" required="true" name="config_name" value="<%= $model_value-> {name} %>"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Configuration' %>(yaml)</label>
+    </div>
+    <div class="input-cell">
+	<div class="cm-editor-wrap">
+%# %= input_tag config_content => $model_value->{config}, type => 'hidden';
+<input type="hidden" required="true" name="config_content" value="<%= $model_value-> {config} %>"/>
+	</div>
+  </div>
+  </div>
+
+  <button type="submit" class="btn dos-button hide-in-progress"><%= l 'Submit'%></button>
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+</form>
+
+
+%# https://docs.mojolicious.org/Mojo/Template

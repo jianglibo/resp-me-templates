@@ -1,0 +1,15 @@
+  <%
+  my $nlink = url_for('/customers/configs')->query({
+      page => (param('page') || 0 ) + 1 
+    });
+  %>
+% my $disabed = scalar(@$rows) < 10 ? 'disabled' : '';
+ <tr id="replaceMe">
+  <td colspan="6">
+  <button class='btn dos-button' <%= $disabed %> hx-get="<%= $nlink %>"
+                      hx-target="#replaceMe"
+                      hx-swap="outerHTML">
+       <%= l 'Load More Configs...' %>
+  </button>
+</td>
+</tr>

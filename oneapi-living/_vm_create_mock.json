@@ -1,0 +1,11 @@
+{
+  "fqdns": "testing.koreacentral.cloudapp.azure.com",
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/for-living-template/providers/Microsoft.Compute/virtualMachines/testing",
+  "location": "koreacentral",
+  "macAddress": "00-22-48-05-62-0C",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "127.0.0.1",
+  "resourceGroup": "for-living-template",
+  "zones": ""
+}

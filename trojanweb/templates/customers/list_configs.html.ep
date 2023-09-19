@@ -1,0 +1,5 @@
+% foreach my $row ( @$rows ) {
+  %= include 'customers/_config_row', model_value => $row, h => {}, fix_lang => 0;
+% }
+
+%= include 'customers/_load_more_configs', rows => $rows,  h => {};

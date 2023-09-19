@@ -1,0 +1,27 @@
+ <tr class="dos-row">
+  <td>
+  <%= include 'client/_table_cell', cid =>"$client->{id}", fvalue => "$client->{username}", fname => 'username' %>
+  </td>
+  <td>
+  <%= include 'client/_table_cell', cid =>"$client->{id}", fvalue => "Change me", fname => 'password' %>
+</td>
+  <td>
+  <%= include 'client/_table_cell', cid =>"$client->{id}", fvalue => format_bytes($client->{quota}), fname => 'quota' %>
+  </td>
+  <td>
+  <%= format_bytes($client->{download}) %>
+  </td>
+  <td>
+  <%= format_bytes($client->{upload}) %>
+  </td>
+  <td>
+  % my $confirm = encode_json {showCancelButton => Mojo::JSON->true, title => 'Confirm', text => 'Do you want to continue?', icon => 'warning', confirmButtonText => 'Confirm', cancelButtonText => 'Cancel'};
+  %# https://htmx.org/attributes/hx-trigger/
+    <button class="btn dos-button" hx-delete="/admin/clients/<%= $client->{id} %>" hx-target="closest tr" hx-swap="outerHTML"
+       data-confirm-message="<%= $confirm %>">
+      <%= l 'Delete' %>
+    </button>
+  </td>
+</tr>
+
+%# https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#include

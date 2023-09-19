@@ -2,6 +2,7 @@
 /* mulitple line comments
 */
 
+# git add flake.nix !!!!!!!!!!!!!!!!!!!!!!!
 # install
 # https://nixos.org/download.html
 # envrc

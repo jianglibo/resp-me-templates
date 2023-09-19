@@ -1,0 +1,32 @@
+{
+	"name": "oneapi-living",
+	"dependencies": [],
+	"next": null,
+	"assets": [],
+	"settings": {
+		"connection": {
+			"host": "change.to.the-created.domain",
+			"port": 22,
+			"user": "user-on-your-server",
+			"workingdir": "/home/user-on-your-server",
+			"sudo": true,
+			"exec": false,
+			"sshkey_id": 9999
+		},
+		"mustache": {
+			"scopes": {
+				"azLogin": {
+					"appId": "",
+					"password": "",
+					"tenant": ""
+				}
+			},
+			"templates": [
+				{
+					"template": "start.sh",
+					"scopes": {}
+				}
+			]
+		}
+	}
+}

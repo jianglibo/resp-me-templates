@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Login Manager</title>
+  
+  %= stylesheet '/assets/css/main.css'
+
+  %# <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+  %#  <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+
+  %= asset_tag '/js/htmx.min.js'
+  %= asset_tag 'js/_hyperscript.min.js'
+  %= asset_tag 'js/sweetalert.js'
+  %= asset_tag 'js/util.js'
+  %# %= app->htmx->asset(url => '/assets/js/htmx.min.js')
+  %# %= app->htmx->asset(url => '/assets/js/_hyperscript.min.js')
+
+%= content_for 'page_assets' => begin
+% end
+
+  </head>
+  <body>
+  <div class="centered-container">
+      <!-- DOS-Style Dropdown -->
+
+%# % if (! current_route 'login') {
+%#   Welcome to Mojolicious!
+%# % }
+%# %= url_for
+
+%= include 'layouts/_language_dropdown'
+  
+  <%= content %>
+
+%= javascript '/assets/js/foot.js'
+
+</div>
+</body>
+
+</html>

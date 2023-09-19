@@ -1,0 +1,11 @@
+%# https://mojolicious.io/blog/tag/rendering/
+%#  https://docs.mojolicious.org/Mojolicious/Plugin/TagHelpers
+%# https://mojojs.org/docs/Rendering.md
+
+
+  % foreach my $row ( @$rows ) {
+    %= include 'client/_table_row', client => $row, h => {}
+  % }
+
+
+%= include 'client/_load_more_clients', rows => $rows, h => {};

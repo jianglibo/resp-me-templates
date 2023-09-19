@@ -1,0 +1,19 @@
+% layout 'default';
+
+%= include 'layouts/_navigate'
+
+<p style="border: none;margin-top: 10px;"><%= l 'Caculate sha224 value of string.' %></p>
+<form hx-post="/misc/sha224" hx-target="#hash-result">
+  <input type="text" name="phrase" placeholder="<%= l 'Text to hash' %>">
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+  <button type="submit" class="hide-in-progress">Q</button>
+  <span id="hash-result">Hash: </span>
+</form>
+
+%= include 'playground/github_assets', repo => 'Dreamacro/clash', assets => [];
+
+
+<form hx-get="/tools/fetch-rule-providers">
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+  <button type="submit" class="hide-in-progress"><%= l 'Click to update Clash rules.' %></button>
+</form>

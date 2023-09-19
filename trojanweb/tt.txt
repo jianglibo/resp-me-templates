@@ -1,0 +1,129 @@
+Web application available at http://127.0.0.1:3000
+$VAR1 = {
+          'host' => '192.168.3.30',
+          'password' => 'my-secret-pw',
+          'reverse_proxy' => 1,
+          'post' => 3306,
+          'database' => 'trojan',
+          'username' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = 'en';
+$VAR1 = bless( {}, 'TrojanWeb::Model::Users' );
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = bless( {}, 'TrojanWeb::Model::Users' );
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = 'en';
+$VAR1 = {
+          'username' => 'trojan',
+          'database' => 'trojan',
+          'password' => 'my-secret-pw',
+          'reverse_proxy' => 1,
+          'post' => 3306,
+          'host' => '192.168.3.30'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = bless( {}, 'TrojanWeb::Model::Users' );
+$VAR1 = bless( {}, 'TrojanWeb::Model::Users' );
+$VAR1 = {
+          'role_id' => undef,
+          'download' => 0,
+          'username' => 'root',
+          'upload' => 0,
+          'password' => 'f8cdb04495ded47615258f9dc6a3f4707fd2405434fefc3cbf4ef4e6',
+          'quota' => 0,
+          'created_at' => '2023-09-05 11:11:51',
+          'id' => 73
+        };
+$VAR1 = 'Role: ';
+$VAR1 = {
+          'reverse_proxy' => 1,
+          'post' => 3306,
+          'password' => 'my-secret-pw',
+          'database' => 'trojan',
+          'host' => '192.168.3.30',
+          'username' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'host' => '192.168.3.30',
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'post' => 3306,
+          'database' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'host' => '192.168.3.30',
+          'post' => 3306,
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'database' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'database' => 'trojan',
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'post' => 3306,
+          'host' => '192.168.3.30'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'host' => '192.168.3.30',
+          'database' => 'trojan',
+          'password' => 'my-secret-pw',
+          'reverse_proxy' => 1,
+          'post' => 3306,
+          'username' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'host' => '192.168.3.30',
+          'database' => 'trojan',
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'post' => 3306
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'reverse_proxy' => 1,
+          'post' => 3306,
+          'password' => 'my-secret-pw',
+          'database' => 'trojan',
+          'host' => '192.168.3.30',
+          'username' => 'trojan'
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'host' => '192.168.3.30',
+          'database' => 'trojan',
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'post' => 3306
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';
+$VAR1 = {
+          'username' => 'trojan',
+          'host' => '192.168.3.30',
+          'database' => 'trojan',
+          'reverse_proxy' => 1,
+          'password' => 'my-secret-pw',
+          'post' => 3306
+        };
+$VAR1 = 'DBI:mysql:database=trojan;host=192.168.3.30';

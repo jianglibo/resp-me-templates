@@ -1,0 +1,17 @@
+<%
+	my $confirm = encode_json {a => 1, b => "2"};
+%>
+
+<button hx-delete="/account" id="t-btn" data-confirm-message=<%== $confirm %>>
+    Delete My Account
+</button>
+
+<script>
+const tbtn = document.getElementById('t-btn');
+tbtn.addEventListener('htmx:confirm', (evt) => {
+  evt.preventDefault();
+  const confirmMessage = evt.target.dataset.confirmMessage;
+  alert(JSON.stringify(JSON.parse(confirmMessage)));
+  evt.detail.issueRequest();
+});
+</script>

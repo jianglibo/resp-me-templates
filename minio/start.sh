@@ -23,7 +23,7 @@ fi
 
 cp -f ./minio.env /etc/default/minio
 
-DOMAIN_NAME={{#cert_dependency}}{{domain_name}}{{/cert_dependency}}
+DOMAIN_NAME={{cert_dependency.domain_name}}
 
 to_dir="/opt/minio/certs"
 

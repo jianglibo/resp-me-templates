@@ -1,0 +1,16 @@
+[Unit]
+Description=My Mojolicious application
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/{{service.appname}}/env
+Type=forking
+User={{service.username}}
+WorkingDirectory={{service.workingDir}}
+PIDFile={{service.workingDir}}/script/hypnotoad.pid
+ExecStart={{service.execStart}}
+ExecReload={{service.execStart}}
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

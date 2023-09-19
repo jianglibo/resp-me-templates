@@ -1,0 +1,16 @@
+  <%
+  my $nlink = url_for('/admin/clients')->query({
+      page => (param('page') || 0 ) + 1, 
+      search => param('search')
+    });
+  %>
+% my $disabed = scalar(@$rows) < 10 ? 'disabled' : '';
+ <tr id="replaceMe">
+  <td colspan="6">
+  <button class='btn dos-button' <%= $disabed %> hx-get="<%= $nlink %>"
+                      hx-target="#replaceMe"
+                      hx-swap="outerHTML">
+      <%= l 'Load More Clients...' %>
+  </button>
+</td>
+</tr>

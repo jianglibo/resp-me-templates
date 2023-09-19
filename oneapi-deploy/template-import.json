@@ -1,0 +1,65 @@
+{
+	"name": "oneapi-deploy",
+	"dependencies": [],
+	"next": null,
+	"assets": [],
+	"settings": {
+		"connection": {
+			"host": "change.to.the-created.domain",
+			"port": 22,
+			"user": "user-on-your-server",
+			"workingdir": "/home/user-on-your-server",
+			"sudo": true,
+			"exec": false,
+			"sshkey_id": 9999
+		},
+		"mustache": {
+			"scopes": {
+				"service": {
+					"username": "respme",
+					"appname": "respme",
+					"workingDir": "/opt/sb3",
+					"execStart": "/opt/executable"
+				},
+				"mysql": {
+					"mysql_root_password": "mysql_root_password",
+					"db_name": "oneapi",
+					"db_user": "oneapi",
+					"db_user_password": "oneapi",
+					"sudo": "sudo",
+					"app_admin_password": "app_admin_password"
+				}
+			},
+			"templates": [
+				{
+					"template": "app.env",
+					"scopes": {}
+				},
+				{
+					"template": "app.service",
+					"scopes": {}
+				},
+				{
+					"template": "nginx.conf",
+					"scopes": {}
+				},
+				{
+					"template": "setup-mysql.sh",
+					"scopes": {}
+				},
+				{
+					"template": "setup-nginx.sh",
+					"scopes": {}
+				},
+				{
+					"template": "setup-service.sh",
+					"scopes": {}
+				},
+				{
+					"template": "start.sh",
+					"scopes": {}
+				}
+			]
+		}
+	}
+}

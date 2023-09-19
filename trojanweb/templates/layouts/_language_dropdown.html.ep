@@ -1,0 +1,30 @@
+<% 
+my $lh = {
+    en => 'English',
+    zh => '中文',
+    ja => '日本語',
+    ko => '한국인',
+    fa => 'فارسی',
+}->{$lang} || 'Language';
+
+%>
+<div class="dropdown">
+        <button id="dropdown-button"><%= $lh %></button>
+<ul id="dropdown-menu" class="hidden">
+    <li><a href="/free/switch-lang/en">
+     English
+    </a></li>
+    <li><a href="/free/switch-lang/zh">
+    中文 
+    </a></li>
+    <li><a href="/free/switch-lang/ja">
+     日本語
+    </a></li>
+    <li><a href="/free/switch-lang/ko">
+     한국인 
+    </a></li>
+    <li><a href="/free/switch-lang/fa">
+     فارسی
+    </a></li>
+</ul>
+</div>

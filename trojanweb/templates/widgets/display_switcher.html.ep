@@ -1,0 +1,1 @@
+<button onclick="var nextElement = document.querySelector('.toggle-me'); if (nextElement) { if (nextElement.style.display === 'none' || nextElement.style.display === '') { nextElement.style.display = 'block'; } else { nextElement.style.display = 'none'; } }">Toggle next element</button>

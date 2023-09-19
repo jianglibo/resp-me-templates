@@ -1,0 +1,51 @@
+% my $display = $h->{display} ? '' : 'style="display:none;"';
+
+%# https://docs.mojolicious.org/Mojolicious/Plugin/TagHelpers#input_tag
+
+%# <%= dumper $client %>
+
+
+<form hx-post="/admin/clients"
+ class="form-table" <%== $display %>
+ hx-ext="disable-element"
+ hx-swap="outerHTML">
+% if ($error) {
+  <div class="error-box">
+    <%= $error %>
+  </div>
+% }
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Username'%>(Email)</label>
+    </div>
+    <div class="input-cell">
+    <input type="text" name="username" value="<%= $client->{username} %>" required="true"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Password' %></label>
+    </div>
+    <div class="input-cell">
+    <input type="text" name="password" value="<%= $client->{password} %>" required="true"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="label-cell">
+      <label><%= l 'Quota' %></label>
+    </div>
+    <div class="input-cell">
+    <input type="text" name="quota" value="<%= $client->{quota} %>" required="true"/>
+      <span>1G,1M etc.</span>
+  </div>
+  </div>
+
+  <button type="submit" class="btn dos-button hide-in-progress">
+  <%= l 'Submit'%>
+  </button>
+  <img style="width: 25px;vertical-align:middle;" class="htmx-indicator my-indicator" src="/assets/svg-loaders/circles.svg">
+</form>
+
+
+
+%# https://docs.mojolicious.org/Mojo/Template

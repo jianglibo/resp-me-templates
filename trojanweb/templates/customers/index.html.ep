@@ -1,0 +1,39 @@
+% layout 'default';
+
+%= include 'layouts/_navigate'
+
+  <table id="configs-table-out">
+  <thead>
+  <tr>
+    <th><%= l 'Name' %></th>
+    <th><%= l 'CreatedAt' %></th>
+    <th><%= l 'Actions' %></th>
+  </tr>
+  </thead>
+  <tbody id="configs-table">
+  
+  % foreach my $row ( @$rows ) {
+    %= include 'customers/_config_row', model_value => $row, h => {}, fix_lang => 0;
+  % }
+
+  % if (! @$rows ) {
+    <tr class="empty-place-holder">
+      <td colspan="3"><%= l "You don't have config yet, click the 'Add a Config' button bellow to add one. Just give it a name and save it." %></td>
+    </tr>
+  % }
+
+%= include 'customers/_load_more_configs', rows => $rows,  h => {}
+</tbody>
+</table>
+
+<h2 onclick="toggleNextElement(this, 'form')" style="cursor: pointer;">
+  <%= l 'Add A Config' %>
+  % if ( ! @$rows ) {
+    <img style="width: 25px;vertical-align:middle;" src="/assets/svg-loaders/puff.svg">
+  % }
+</h2>
+%= include 'customers/_edit_config', error => $error, h => {}, model_value => $model_value;
+
+%= javascript "/assets/js/editor.bundle.min.js" 
+
+%# %= include 'customers/play'

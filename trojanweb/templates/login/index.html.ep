@@ -1,0 +1,17 @@
+% layout 'default';
+%= form_for index => begin
+  % if (param 'user') {
+    <b>
+%= l 'Wrong name or password, please try again.'
+    </b><br>
+  % }
+  %= (l 'Name') . ':'
+  <br>
+  %= text_field 'user'
+  <br>
+ %= (l 'Password') . ':'
+  <br>
+  %= password_field 'pass'
+  <br>
+  %= submit_button (l 'Login')
+% end

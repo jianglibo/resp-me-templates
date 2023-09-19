@@ -1,0 +1,21 @@
+[Unit]
+Description=Java Spring Boot App 
+Documentation=https://resp.me
+After=network.target 
+
+[Service]
+EnvironmentFile=/etc/{{service.appname}}/env
+Type=simple
+User={{service.username}}
+WorkingDirectory={{service.workingDir}}
+EXEC_START={{service.execStart}}
+StandardOutput=journal
+StandardError=journal 
+SyslogIdentifier={{service.appname}} 
+SuccessExitStatus=143 
+TimeoutStopSec=10 
+Restart=no
+RestartSec=60 
+
+[Install]
+WantedBy=multi-user.target
