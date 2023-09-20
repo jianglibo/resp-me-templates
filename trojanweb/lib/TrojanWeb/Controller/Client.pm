@@ -35,7 +35,7 @@ sub edit_get ($self) {
 sub edit_put ($self) {
     my $hash_ref = $self->req->params->to_hash;
     my $fname    = ( keys %$hash_ref )[0];
-    print Dumper($fname);
+    # print Dumper($fname);
     my $client_id         = $self->param('client_id');
     my $fvalue            = $self->param($fname);
     my $value_from_client = $fvalue;
@@ -110,7 +110,7 @@ sub create ($self) {
             h        => {}
         );
         $self->htmx->res->trigger( newClient => $tr );
-        print Dumper(".....................................................");
+        # print Dumper(".....................................................");
         return $self->render(
             template => 'client/_add_form',
             error    => undef,

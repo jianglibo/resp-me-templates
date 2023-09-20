@@ -31,4 +31,3 @@ source ./setup-supervisor.sh
 
 echo "end of the deploy.sh"
 # for debug purpose the deployed files will not delete at exit.
-exit 210

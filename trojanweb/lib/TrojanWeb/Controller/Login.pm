@@ -26,8 +26,8 @@ sub index ($self) {
         $check_result->{ppw} = cipher_passowrd $self->app->secrets->[0], $pass;
         $self->session( user => $check_result );
         $self->flash( message => 'Thanks for logging in.' );
-        print Dumper($check_result);
-        print Dumper($pass);
+        # print Dumper($check_result);
+        # print Dumper($pass);
         # if ( $self->is_admin ) {
         # $self->redirect_to('admin');
         # } else {

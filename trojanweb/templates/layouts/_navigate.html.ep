@@ -25,4 +25,8 @@
 %= link_to 'downloads' => {action => 'downloads'} => (class => (current_route 'downloads') ? 'active' : undef) => begin
 %= l 'Downloads'
 % end
+
+%= link_to 'help' => (class => (current_route 'help') ? 'active' : undef) => begin
+%= l 'Help'
+% end
 </div>

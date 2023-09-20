@@ -61,10 +61,11 @@ ALTER TABLE users
 INSERT INTO roles(name)
     VALUES ('admin');
 
-INSERT INTO users(username, PASSWORD, role_id)
+INSERT INTO users(username, PASSWORD, quota, role_id)
 SELECT
     'admin',
     'sha224_admin_password',
+    1099511627776,
     id
 FROM
     roles

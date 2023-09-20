@@ -147,6 +147,14 @@ table {
 	/* Bright green text */
 }
 
+.no-border {
+	border: none;
+}
+
+.no-border p{
+	border: none;
+}
+
 th,
 td {
 	border: 1px solid #00ff00;

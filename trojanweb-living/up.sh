@@ -185,9 +185,9 @@ EOF
 )
 
 username="trojanweb"
-mysql_root_password=$(pwgen 64 1)
-db_user_password=$(pwgen 64 1)
-app_admin_password=$(pwgen 64 1)
+mysql_root_password=$(pwgen 16 1)
+db_user_password=$(pwgen 16 1)
+app_admin_password=$(pwgen 16 1)
 msecret=$(pwgen 64 1)
 trojanweb_settings=$(
 	cat <<EOF
@@ -288,7 +288,7 @@ deploy_customize=$(
 EOF
 )
 
-echo "start deploy deploy_definition"
+echo "start deploy deploy_definition $trojanweb_result_id"
 # this is event message output, not json.
 deploy_deploy_definition "$trojanweb_result_id" "$deploy_customize"
 

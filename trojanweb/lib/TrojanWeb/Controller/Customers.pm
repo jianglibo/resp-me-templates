@@ -17,10 +17,6 @@ use TrojanWeb::Helper::DbStatements
 use Data::Dumper;
 
 sub index ($self) {
-    print Dumper("-----------------------------------");
-
-    # print Dumper($self->user_lang);
-    print Dumper("-----------------------------------");
     my $user_id = $self->session('user')->{user_id};
     my $rows    = select_configs $self->dbh, $user_id, 0;
     my $ppw     = $self->session('user')->{ppw};
@@ -220,7 +216,7 @@ sub delete_download ($self) {
     eval {
         # Code that might throw an exception
         my $download = select_download $self->dbh, $download_id;
-        print Dumper($download);
+        # print Dumper($download);
         my $file_dst =
           $self->app->home->child('downloads')
           ->child( $download->{'pathname'} );
@@ -238,9 +234,9 @@ sub delete_download ($self) {
 }
 
 sub download_get ($self) {
-    print Dumper( $self->is_htmx_request );
+    # print Dumper( $self->is_htmx_request );
     my $is_hx = $self->is_htmx_request;
-    print Dumper($is_hx);
+    # print Dumper($is_hx);
     my $download = select_download $self->dbh, $self->param('id');
     if ( !$download ) {
         if ($is_hx) {
@@ -295,7 +291,7 @@ sub download_get ($self) {
 
     if ($is_hx) {
         $self->htmx->res->reswap('none');
-        print Dumper( $self->req->url->path );
+        # print Dumper( $self->req->url->path );
         $self->htmx->res->redirect( $self->req->url->path );
         return $self->render( text => '' );
     }

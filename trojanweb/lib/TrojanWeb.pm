@@ -183,6 +183,8 @@ sub startup ($self) {
     $is_admin->post("/clients/search")->to('client#search');
     $is_admin->delete("/clients/:client_id")->to('client#delete');
 
+    $logged_in->get("/help")->to('help#index')->name('help');
+
     $logged_in->get("/playground")->to('playground#index');
     $logged_in->get("/playground/github-repo")->to('playground#github_repo');
     $logged_in->get("/customers")->to('customers#index');
