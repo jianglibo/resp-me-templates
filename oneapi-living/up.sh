@@ -189,7 +189,7 @@ oneapi_settings=$(
 {
 	"template_deploy_history_id": $template_deploy_history_id,
 		"connection": $connection,
-		"entrypoint_params": ["cert"],
+		"entrypoint_params": ["deploy"],
 		"all_possible_actions": ["cert", "deploy","redeploy"],
 		"mustache": {
 			"scopes": {
@@ -263,31 +263,26 @@ if ! save_cloud_resouce "$cloud_resouce"; then
 	exit 210
 fi
 
-update_cron=$(
+echo "start add cron item"
+cron_body=$(
 	cat <<EOF
 {
-	"id": $oneapi_result_id,
-	"cron": "75d,75d"
-	}
+	"name": "cert updates",
+	"cron_expression": "75d,75d",
+	"params": {
+		"entrypoint_params": ["cert"],
+	},
+	"owner_type": "deploy_definitions",
+	"owner_id": $oneapi_result_id
+}
 EOF
 )
 
-echo "start update deploy cron"
-update_deploy "$update_cron"
-
-# make a deloyment for oneapi-deploy, the code above create only a definition not a deployment, only the deployment will
-# actually do things on the just created vm.
-deploy_customize=$(
-	cat <<EOF
-{
-	"entrypoint_params": ["deploy"]
-	}
-EOF
-)
+add_deploy_cron "$cron_body"
 
 # this is event message output, not json.
 echo "start deploy deploy_definition $oneapi_result_id"
-deploy_deploy_definition "$oneapi_result_id" "$deploy_customize"
+deploy_deploy_definition "$oneapi_result_id"
 
 result_for_final_user=$(
 	cat <<EOF
