@@ -23,6 +23,7 @@ fi
 client_id=$(cat "$definition_json" | jq -r .user_id)
 
 prevDeployResult=$(cat "$template_deploy_history_json" | jq -r .deploy_result)
+template_deploy_history_id=$(cat "$template_deploy_history_json" | jq -r .id)
 prevSshKey=$(echo $prevDeployResult | jq -r .sshkey.data.id)
 
 if [[ (-n "$prevSshKey") && ("$prevSshKey" != "null") ]]; then
@@ -37,7 +38,7 @@ else
 		exit 210
 	fi
 
-	step_update_result=update_template_deploy_step_result "sshkey" "$sshkey"
+	update_template_deploy_step_result "sshkey" "$sshkey"
 fi
 
 # Construct the VM name using variable expansion
@@ -48,7 +49,7 @@ prevVmCreateResult=$(echo $prevDeployResult | jq -r '.create_vm')
 
 echo "prevVmCreateResult:$prevVmCreateResult"
 
-if [[ (-n "$prevVmCreateResult") && ($prevVmCreateResult) != "null" ]]; then
+if [[ -n "$prevVmCreateResult" && $prevVmCreateResult != "null" ]]; then
 	echo "vm created before."
 	echo "$prevVmCreateResult"
 	vm_create_result=$prevVmCreateResult
@@ -104,6 +105,25 @@ ccc=$(echo $prevDeployResult | jq -r '.cert')
 cert_result_id=$(echo $prevDeployResult | jq -r '.cert.data.id')
 settings_str=$(echo $prevDeployResult | jq -r .cert.data.settings)
 domain_name=$(echo $settings_str | jq -r .mustache.scopes.domain_name)
+ip_address_in_cert=$(echo $settings_str | jq -r .mustache.scopes.ip_address)
+
+# need to update the dns record to reflect the new ip.
+# do an update to the cert deploy definition. when updating update the dns record too.
+# is the necessary to update the deploy_result?
+if [[ $ip_address != $ip_address_in_cert ]]; then
+	echo "ip address changed, update cert deploy definition."
+	cert_settings=$(
+		cat <<EOF
+{
+	"mustache": {
+		"scopes":{
+			"ip_address": "${ip_address}"
+		}
+	}
+}
+EOF
+	)
+fi
 
 if [[ -z $cert_result_id || $cert_result_id == "null" ]]; then
 	# will override the default 192.168.0.1 ip address on result cert deploy definition.
@@ -160,13 +180,14 @@ EOF
 )
 
 username="oneapi"
-mysql_root_password=$(pwgen 64 1)
-db_user_password=$(pwgen 64 1)
-app_admin_password=$(pwgen 64 1)
+mysql_root_password=$(pwgen 16 1)
+db_user_password=$(pwgen 16 1)
+app_admin_password=$(pwgen 16 1)
 msecret=$(pwgen 64 1)
 oneapi_settings=$(
 	cat <<EOF
 {
+	"template_deploy_history_id": $template_deploy_history_id,
 		"connection": $connection,
 		"entrypoint_params": ["cert"],
 		"all_possible_actions": ["cert", "deploy","redeploy"],
@@ -177,15 +198,15 @@ oneapi_settings=$(
 					"username": "$username",
 					"appname": "$username",
 					"workingDir": "/opt/$username",
-					"execStart": "hypnotoad /opt/$username/script/${username}.pl"
+					"execStart": "/opt/oneapi/one-api"
 				},
 				"mojolicious": {
 					"secret": "$msecret"
 				},
 				"mysql": {
 					"mysql_root_password": "${mysql_root_password}",
-					"db_name": "trojan",
-					"db_user": "trojan",
+					"db_name": "oneapi",
+					"db_user": "oneapi",
 					"db_user_password": "${db_user_password}",
 					"app_admin_password": "${app_admin_password}"
 				}
@@ -198,7 +219,7 @@ oneapi_result=$(curl_post "$oneapi_settings" "/tobe/deploy_templates/oneapi-depl
 
 oneapi_result_id=$(echo $oneapi_result | jq .data.id)
 
-if [[ (-z $trojanweb_result_id) || $trojanweb_result_id == "null" ]]; then
+if [[ (-z $oneapi_result_id) || $oneapi_result_id == "null" ]]; then
 	echo "got error. create oneapi-deploy newInstance failed:"
 	echo "$oneapi_settings"
 	echo "$oneapi_result"
@@ -226,10 +247,6 @@ if ! update_template_deploy_step_result "deploy" "$deploy_step_result"; then
 fi
 
 
-if ! update_template_deploy_step_result "deploy" $oneapi_result; then
-	exit 210
-fi
-
 resouce_id=$(echo $vm_create_result | jq -r .id)
 cloud_resouce=$(
 	cat <<EOF
@@ -255,6 +272,7 @@ update_cron=$(
 EOF
 )
 
+echo "start update deploy cron"
 update_deploy "$update_cron"
 
 # make a deloyment for oneapi-deploy, the code above create only a definition not a deployment, only the deployment will
@@ -268,6 +286,7 @@ EOF
 )
 
 # this is event message output, not json.
+echo "start deploy deploy_definition $oneapi_result_id"
 deploy_deploy_definition "$oneapi_result_id" "$deploy_customize"
 
 result_for_final_user=$(
@@ -275,7 +294,7 @@ result_for_final_user=$(
 {"settings":
   {
     "url": "https://${domain_name}",
-	"username": "admin",
+	"username": "root",
 	"password": "${app_admin_password}",
 	"connection": $connection
   },

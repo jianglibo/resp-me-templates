@@ -36,6 +36,14 @@
 					"scopes": {}
 				},
 				{
+					"template": "init.sql",
+					"scopes": {}
+				},
+				{
+					"template": "deploy.sh",
+					"scopes": {}
+				},
+				{
 					"template": "app.service",
 					"scopes": {}
 				},
