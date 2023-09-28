@@ -80,3 +80,5 @@ else
 fi
 
 sudo systemctl restart mysql
+
+# ALTER USER 'trojan'@'localhost' IDENTIFIED BY 'ooF7Eegiboy0eiqu';

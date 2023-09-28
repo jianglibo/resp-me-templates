@@ -1,16 +1,18 @@
 {
-	"action": "update",
-	"sub_action": "save_step_result",
-	"target": "template_deploy_histories",
+	"action": "create",
+	"sub_action": "",
+	"target": "crons",
 	"variables": {
-		"_set": {
-			"id": 71,
-			"step": "deploy",
-			"step_result": {
-				"data": {
-					"id": 530,
-					"name": "trojanweb-deploy-ins",
-					"settings":"{\"connection\":{\"port\":22,\"workingdir\":\"/home/azureuser\",\"host\":\"y42.free-ssl.me\",\"sshkey_id\":107,\"sudo\":true,\"user\":\"azureuser\",\"exec\":false},\"template_deploy_history_id\":71,\"entrypoint_params\":[\"cert\"],\"all_possible_actions\":[\"cert\",\"deploy\",\"redeploy\"],\"mustache\":{\"scopes\":{\"mojolicious\":{\"secret\":\"neiTheim0equaiph4ohyia3Uuv7ooF8isho7RooVethiep1phee4huqu0johbe8O\"},\"mysql\":{\"app_admin_password\":\"Oophae6noY2phia5wie7da0reesoophae9xey4ui9EepeiNif7ohGhaibai4jued\",\"mysql_root_password\":\"ia6No1eipeihe1aa3aingeexeiphouth8ahch7hahm2einahnae0chiePocaafah\",\"db_name\":\"trojan\",\"db_user\":\"trojan\",\"db_user_password\":\"au2unguo7Tei4mu7chayie3eev6Eite6azub5aip3Quoh9yaf9LeimahhaidaYae\",\"sudo\":\"sudo\"},\"service\":{\"execStart\":\"hypnotoad
-				}
-			}
+		"object": {
+			"name": "cert updates",
+			"cron_expression": "75d,75d",
+			"params": {
+				"entrypoint_params": [
+					"cert"
+				]
+			},
+			"owner_type": "deploy_definitions",
+			"owner_id": 578
 		}
+	}
+}

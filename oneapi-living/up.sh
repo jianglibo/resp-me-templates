@@ -270,7 +270,7 @@ cron_body=$(
 	"name": "cert updates",
 	"cron_expression": "75d,75d",
 	"params": {
-		"entrypoint_params": ["cert"],
+		"entrypoint_params": ["cert"]
 	},
 	"owner_type": "deploy_definitions",
 	"owner_id": $oneapi_result_id

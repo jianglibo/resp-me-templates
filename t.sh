@@ -1,26 +1,66 @@
 #!/bin/bash
 
-substitute_vars() {
-	input_file="$1"
-	shift
-	if [ $# -lt 2 ] || [ $(($# % 2)) -eq 1 ]; then
-		echo "Error: You must provide an even number of parameters (key-value pairs)." >&2
-		return 1
+#!/bin/bash
+
+action="$1"
+if ! command -v tree; then
+	apt install tree
+fi
+
+RJBHOME="/root/.jbang"
+alias j!=jbang
+export PATH="$RJBHOME/bin:$RJBHOME/currentjdk/bin:$PATH"
+export JAVA_HOME="$RJBHOME/currentjdk"
+
+if command -v jbang; then
+	echo "jbang already installed"
+else
+	echo "Installing jbang"
+	curl -Ls https://sh.jbang.dev | bash -s - app setup
+fi
+
+source ./deploy-util.sh
+date -u
+tree
+echo "the action is: $action"
+if [[ "$action" == "cert" ]]; then
+	echo "start copying certs..."
+	# /etc/nginx/sites-available/resp.me
+	if [[ $? -ne 0 ]]; then
+		echo "last exit code is non-zero. Exiting...."
 	fi
-	while [ $# -gt 0 ]; do
-		# Extract the key and value from arguments
-		key="$1"
-		value="$2"
-		# Set the environment variable using export
-		export "$key=$value"
-		# Shift the arguments to process the next pair
-		shift 2
-	done
+	systemctl reload nginx
 
-	echo "$@"
-	echo "$#"
-	envsubst < "$input_file"
-}
+	appId={{appId}}
+	password={{password}}
+	tenant={{tenant}}
+	resourceId={{resourceId}}
+	resourceGroup={{resourceGroup}}
+	appname={{appname}}
 
-substitute_vars "$@"
+	az login --service-principal -u ${appId} -p ${password} --tenant ${tenant}
 
+	az config set extension.use_dynamic_install=yes_without_prompt
+
+	hostname="resp.me"
+	pfx_password=$(cat dependencies/396/pfx_password.txt)
+	certificate_file="dependencies/396/pfxfile_1.1.1f.pfx"
+	az containerapp ssl upload -g ${resourceGroup} --name ${appname} -f ${certificate_file} -e ${resourceId} -p "${pfx_password}" --hostname ${hostname}
+
+	hostname="dev.resp.me"
+	certificate_file="dependencies/397/pfxfile_1.1.1f.pfx"
+	pfx_password=$(cat dependencies/397/pfx_password.txt)
+	az containerapp ssl upload -g ${resourceGroup} --name ${appname} -f ${certificate_file} -e ${resourceId} -p "${pfx_password}" --hostname ${hostname}
+
+elif [[ "$action" == "destroy" ]]; then
+	echo "start destroying trojanweb ..."
+elif [[ "$action" == "redeploy" ]]; then
+	echo "start redeploying..."
+else
+	echo "start deploying trojanweb..."
+	# source ./deploy.sh
+fi
+
+date -u
+
+exit 210

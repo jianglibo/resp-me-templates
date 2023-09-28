@@ -7,7 +7,7 @@ source ./deploy-util.sh
 if [[ "$action" == "cert" ]];then
 	echo "start copying certs..."
 	backup_and_copy ./certs /etc/nginx/certs
-	systemctl reload trojan
+	systemctl reload oneapi
 elif [[ "$action" == "destroy" ]];then
 	echo "start destroying..."
 elif [[ "$action" == "redeploy" ]];then
